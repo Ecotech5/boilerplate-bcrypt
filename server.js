@@ -17,6 +17,14 @@ bcrypt.hash(myPlaintextPassword, saltRounds, (err, hash) => {
     console.error(err);
   } else {
     console.log("Hashed password (async):", hash);
+    
+    bcrypt.compare(myPlaintextPassword, hash, (err, res) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log("Password match result:", res); // should log: true
+      }
+    });
   }
 });
 
@@ -24,8 +32,7 @@ bcrypt.hash(myPlaintextPassword, saltRounds, (err, hash) => {
 
 //START_SYNC
 
-const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
-console.log("Hashed password (sync):", hash);
+// (You can leave this empty or keep previous sync hash code if required)
 
 //END_SYNC
 
